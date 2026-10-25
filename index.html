@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ACADEX | Student performance tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Caveat:wght@600;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<!-- shared art: logo gradient, wood, chalk formulas -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb400"/><stop offset="1" stop-color="#ff3d8b"/></linearGradient>
+    <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a56a34"/><stop offset="1" stop-color="#5a3717"/></linearGradient>
+    <g id="chalkart" font-family="Caveat, cursive" font-weight="700">
+      <text x="50" y="120" font-size="46" fill="#ffe45c" transform="rotate(-6 50 120)">x² + y² = r²</text>
+      <text x="880" y="95" font-size="56" fill="#ff8fb8" transform="rotate(5 880 95)">E = mc²</text>
+      <text x="940" y="270" font-size="44" fill="#7fd0ff">∫ sin x dx</text>
+      <text x="60" y="320" font-size="40" fill="#8ff0cf">y = mx + c</text>
+      <text x="520" y="70" font-size="50" fill="#fff">√3</text>
+      <text x="690" y="545" font-size="40" fill="#ffe45c">Σ n = n(n+1)/2</text>
+      <text x="400" y="575" font-size="38" fill="#ff8fb8">π ≈ 3.14159</text>
+      <text x="1010" y="440" font-size="40" fill="#8ff0cf">a² + b² = c²</text>
+      <g fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round">
+        <path d="M70 560V400M70 560H250"/><path d="M70 540C110 380 190 380 240 540"/>
+        <path d="M1030 330L1150 330L1150 220Z"/><path d="M1130 330V310H1150"/>
+        <circle cx="330" cy="180" r="38" stroke-dasharray="6 8"/><path d="M330 180L362 160"/>
+      </g>
+    </g>
+  </defs>
+</svg>
+
+<!-- COVER PAGE -->
+<section id="cover" class="cover">
+  <div class="board" id="top">
+    <svg class="chalk" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#chalkart"/></svg>
+    <nav class="cnav">
+      <div class="brand sm">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="18" fill="url(#lg)"/><rect x="13" y="34" width="9" height="16" rx="3" fill="#fff"/><rect x="27" y="24" width="9" height="26" rx="3" fill="#fff"/><rect x="41" y="13" width="9" height="37" rx="3" fill="#fff"/></svg>
+        <h1>ACADEX</h1>
+      </div>
+      <div class="clinks"><a href="#top">Home</a><a href="#about">About</a><a href="#contact">Contact</a><button class="loginBtn">Teacher login</button></div>
+    </nav>
+    <div class="ctext">
+      <h2 class="ctitle">ACADEX</h2>
+      <p class="csub">Student performance tracker</p>
+      <p class="quote">“Only you can change your life. No one can do it for you.”</p>
+      <div class="cta"><button class="loginBtn">Teacher login</button><a class="btnlink light" href="#about">What is ACADEX?</a></div>
+    </div>
+    <svg class="desk" viewBox="0 0 1200 230" aria-hidden="true">
+      <rect y="130" width="1200" height="100" fill="url(#wood)"/>
+      <path d="M0 165H1200M0 200H1200" stroke="rgba(0,0,0,.22)" stroke-width="2"/>
+      <g><rect x="90" y="100" width="170" height="30" rx="4" fill="#ff3d8b"/><rect x="108" y="72" width="150" height="28" rx="4" fill="#2ba8ff"/><rect x="98" y="46" width="160" height="26" rx="4" fill="#ffb400"/>
+         <path d="M90 115H260M108 86H258M98 59H258" stroke="#fff" stroke-opacity=".6" stroke-width="3"/></g>
+      <g><polygon points="400,150 590,140 590,205 380,215" fill="#f7f1e0"/><polygon points="590,140 790,150 810,215 590,205" fill="#fffaf0"/>
+         <path d="M410 165L585 157M404 180L585 172M398 195L585 187M600 157L780 165M600 172L790 180M600 187L798 195" stroke="#6c8fd0" stroke-opacity=".7" stroke-width="2"/>
+         <path d="M650 160L850 195" stroke="#ffb400" stroke-width="8" stroke-linecap="round"/></g>
+      <g transform="translate(930 75)"><circle cx="-26" cy="-50" r="12" fill="#c43b3b"/><circle cx="26" cy="-50" r="12" fill="#c43b3b"/>
+         <circle r="52" fill="#f3e9d2" stroke="#3a2a1a" stroke-width="8"/><path d="M0 0V-30M0 0L22 12" stroke="#3a2a1a" stroke-width="5" stroke-linecap="round"/><circle r="4" fill="#3a2a1a"/>
+         <path d="M-34 52L-44 58M34 52L44 58" stroke="#3a2a1a" stroke-width="6" stroke-linecap="round"/></g>
+      <g><rect x="1070" y="70" width="58" height="62" rx="9" fill="#dcd0ff"/>
+         <path d="M1085 70L1068 18M1099 70L1100 12M1113 70L1130 22" stroke-width="8" stroke-linecap="round" stroke="#ffb400"/>
+         <path d="M1099 70L1100 12" stroke="#2ba8ff" stroke-width="8" stroke-linecap="round"/><path d="M1113 70L1130 22" stroke="#ff3d8b" stroke-width="8" stroke-linecap="round"/></g>
+    </svg>
+  </div>
+
+  <section id="about" class="about">
+    <h2>About us</h2>
+    <p>ACADEX is a web-based student performance tracker built with HTML, CSS, JavaScript and Python. Teachers record marks and daily attendance, and ACADEX turns them into grades, attendance percentages and progress charts.</p>
+    <div class="feats">
+      <div class="feat"><b>Marks and grades</b><span>Scores by subject, graded A+ to F.</span></div>
+      <div class="feat"><b>Daily attendance</b><span>Mark present, late or absent in one tap.</span></div>
+      <div class="feat"><b>Progress charts</b><span>See how each student improves over time.</span></div>
+      <div class="feat"><b>CSV export</b><span>Download marks and attendance for reports.</span></div>
+      <div class="feat"><b>Extra-curriculars</b><span>Music, dance, sports, clubs and the achievements that go with them.</span></div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>Contact us</h2>
+    <form id="contactForm">
+      <input name="email" type="email" placeholder="Email" required>
+      <input name="subject" placeholder="Subject" required>
+      <textarea name="message" placeholder="Message" required></textarea>
+      <button>Send message</button>
+      <p class="err" id="contactMsg" role="status"></p>
+    </form>
+  </section>
+  <footer class="cfoot">© 2026 ACADEX. Learn. Track. Grow.</footer>
+</section>
+
+<!-- LOGIN -->
+<section id="auth" class="auth" hidden>
+  <svg class="chalk" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#chalkart"/></svg>
+  <div class="brand">
+    <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="18" fill="url(#lg)"/><rect x="13" y="34" width="9" height="16" rx="3" fill="#fff"/><rect x="27" y="24" width="9" height="26" rx="3" fill="#fff"/><rect x="41" y="13" width="9" height="37" rx="3" fill="#fff"/></svg>
+    <div><h1>ACADEX</h1><p>Every grade. Every day. One place.</p></div>
+  </div>
+  <form id="authForm" class="panel">
+    <h2 id="authTitle">Teacher login</h2>
+    <p class="meta" id="authHint"></p>
+    <input name="username" placeholder="Username" autocomplete="username" required>
+    <input name="password" type="password" placeholder="Password" autocomplete="current-password" required>
+    <div id="setupFields" class="setupfields" hidden>
+      <input name="name" placeholder="Your full name">
+      <input name="subject_code" placeholder="Subject code (e.g. MATH101)">
+      <input name="subject_name" placeholder="Subject you teach">
+      <input name="phone" type="tel" placeholder="Phone no.">
+      <input name="email" type="email" placeholder="Email">
+      <input name="designation" placeholder="Designation (e.g. Assistant Professor)">
+      <input name="department" placeholder="Department (e.g. Computer Science)">
+    </div>
+    <button id="authBtn">Log in</button>
+    <button type="button" class="alt" id="backHome">Back to home</button>
+    <p class="err" id="authErr"></p>
+  </form>
+</section>
+
+<!-- TEACHER PROFILE (first screen after login) -->
+<section id="profile" class="auth profilepage" hidden>
+  <svg class="chalk" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#chalkart"/></svg>
+  <div class="idcard panel">
+    <div id="pView">
+      <div class="idtop"><div class="av big" id="pAv"></div>
+        <div><p class="meta">Welcome back</p><h2 id="pName"></h2><p class="role" id="pRole"></p><span class="code" id="pSubj"></span></div></div>
+      <dl class="info"><dt>Phone</dt><dd id="pPhone"></dd><dt>Email</dt><dd id="pEmail"></dd><dt>Login</dt><dd id="pUser"></dd></dl>
+      <div class="pstats" id="pStats"></div>
+      <h3>Today's classes</h3>
+      <div id="pToday"></div>
+    </div>
+    <form id="profileForm" hidden>
+      <h3 id="pFormTitle">Teacher profile</h3>
+      <input name="name" placeholder="Full name" required>
+      <input name="subject_code" placeholder="Subject code (e.g. MATH101)" required>
+      <input name="subject_name" placeholder="Subject name" required>
+      <input name="phone" type="tel" placeholder="Phone no.">
+      <input name="email" type="email" placeholder="Email">
+      <input name="designation" placeholder="Designation (e.g. Assistant Professor)">
+      <input name="department" placeholder="Department (e.g. Computer Science)">
+      <label class="filepick">Profile photo (JPG, PNG or WebP, up to 3 MB)<input type="file" name="photo" accept="image/png,image/jpeg,image/webp"></label>
+      <div class="pact"><button>Save profile</button><button type="button" class="alt" id="pCancel">Cancel</button></div>
+      <p class="err" id="pErr"></p>
+    </form>
+    <div class="pact" id="pActions">
+      <button id="pContinue">Go to dashboard</button>
+      <button class="alt" id="pEdit">Edit profile</button>
+      <button class="alt" id="pLogout">Log out</button>
+    </div>
+  </div>
+</section>
+
+<!-- APP -->
+<div id="app" hidden>
+<header class="hero">
+  <svg class="chalk" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#chalkart"/></svg>
+  <div class="hero-in">
+    <div class="brand">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="18" fill="url(#lg)"/><rect x="13" y="34" width="9" height="16" rx="3" fill="#fff"/><rect x="27" y="24" width="9" height="26" rx="3" fill="#fff"/><rect x="41" y="13" width="9" height="37" rx="3" fill="#fff"/></svg>
+      <div><h1>ACADEX</h1><p>Every grade. Every day. One place.</p></div>
+    </div>
+    <div class="who"><span class="av xs" id="whoAv"></span><span id="who"></span> <button id="myProfile">My profile</button> <button id="logout">Log out</button></div>
+  </div>
+  <div class="stats" id="stats"></div>
+</header>
+<nav class="tabs">
+  <button data-tab="students" class="on">Students</button>
+  <button data-tab="attendance">Attendance</button>
+  <button data-tab="timetable">Timetable</button>
+  <button data-tab="teachers">Teachers</button>
+  <button data-tab="activities">Activities</button>
+  <span class="grow"></span>
+  <a class="btnlink" href="/api/export/marks.csv">Export marks</a>
+  <a class="btnlink" href="/api/export/attendance.csv">Export attendance</a>
+  <a class="btnlink" href="/api/export/activities.csv">Export activities</a>
+</nav>
+
+<main id="tab-students">
+  <section class="panel add">
+    <h2>Add a student</h2>
+    <form id="studentForm">
+      <input name="name" placeholder="Full name" required>
+      <input name="roll" placeholder="Roll number" required>
+      <input name="class" placeholder="Class (e.g. 10-B)" required>
+      <button>Add student</button>
+    </form>
+    <p class="err" id="formErr"></p>
+  </section>
+  <section class="list">
+    <div class="toolbar">
+      <input id="search" type="search" placeholder="Search by name, roll or class">
+      <select id="sort">
+        <option value="name">Sort by name</option>
+        <option value="top">Highest percentage</option>
+        <option value="low">Lowest percentage</option>
+        <option value="att">Lowest attendance</option>
+      </select>
+    </div>
+    <div id="students"></div>
+  </section>
+</main>
+
+<main id="tab-attendance" class="single" hidden>
+  <section class="panel">
+    <form id="quickAdd" class="quick">
+      <strong>New student</strong>
+      <input name="name" placeholder="Full name" required>
+      <input name="roll" placeholder="Roll number" required>
+      <input name="class" placeholder="Class" required>
+      <label class="chk"><input type="checkbox" id="quickPresent" checked> Mark present on this date</label>
+      <button>Add student</button>
+    </form>
+    <div class="toolbar">
+      <input type="date" id="attDate">
+      <button class="alt" id="allPresent">Mark all present</button>
+      <button id="saveAtt">Save attendance</button>
+    </div>
+    <p class="meta" id="attMsg"></p>
+    <div id="attList"></div>
+  </section>
+</main>
+<main id="tab-timetable" hidden>
+  <section class="panel add">
+    <h2>Add a class slot</h2>
+    <form id="slotForm">
+      <input name="class" list="classList" placeholder="Class (e.g. 10-B)" required>
+      <datalist id="classList"></datalist>
+      <select name="day" aria-label="Day">
+        <option value="0">Monday</option><option value="1">Tuesday</option><option value="2">Wednesday</option>
+        <option value="3">Thursday</option><option value="4">Friday</option><option value="5">Saturday</option>
+      </select>
+      <div class="two"><label>Start<input type="time" name="start" required></label><label>End<input type="time" name="end" required></label></div>
+      <input name="subject" placeholder="Subject" required>
+      <input name="teacher" list="teacherList" placeholder="Teacher" required>
+      <datalist id="teacherList"></datalist>
+      <input name="room" placeholder="Room (optional)">
+      <button>Add slot</button>
+    </form>
+    <p class="err" id="slotErr"></p>
+  </section>
+  <section class="list">
+    <div class="toolbar"><select id="ttClass" aria-label="Class"></select><select id="ttTeacher" aria-label="Teacher"></select></div>
+    <div class="weekwrap"><div class="week" id="week"></div></div>
+  </section>
+</main>
+<main id="tab-teachers" hidden>
+  <section class="panel add">
+    <h2>Add a teacher</h2>
+    <form id="teacherForm">
+      <input name="name" placeholder="Teacher name" required>
+      <input name="subject_code" placeholder="Subject code (e.g. MATH101)" required>
+      <input name="subject_name" placeholder="Subject name" required>
+      <input name="phone" type="tel" placeholder="Phone no.">
+      <input name="email" type="email" placeholder="Email">
+      <input name="designation" placeholder="Designation (e.g. Assistant Professor)">
+      <input name="department" placeholder="Department (e.g. Computer Science)">
+      <p class="meta">Optional: give this teacher a login</p>
+      <input name="username" placeholder="Username" autocomplete="off">
+      <input name="password" type="password" placeholder="Password (6+ characters)" autocomplete="new-password">
+      <button>Add teacher</button>
+    </form>
+    <p class="err" id="teacherErr"></p>
+  </section>
+  <section class="list">
+    <div class="toolbar"><input id="tSearch" type="search" placeholder="Search by name, subject or email"></div>
+    <div class="tablecard">
+      <div class="pill">Teacher details</div>
+      <div class="tablewrap"><table class="dt">
+        <thead><tr><th>Name</th><th>Subject code</th><th>Subject name</th><th>Role</th><th>Phone no.</th><th>Email</th><th>Login</th><th>Classes / week</th><th></th></tr></thead>
+        <tbody id="teachBody"></tbody>
+      </table></div>
+    </div>
+  </section>
+</main>
+<main id="tab-activities" hidden>
+  <section class="panel add">
+    <h2>Add an activity</h2>
+    <form id="actForm">
+      <input name="name" placeholder="Activity name (e.g. School choir)" required>
+      <select name="category" id="actCat" aria-label="Category"></select>
+      <input name="coach" list="teacherList" placeholder="Coach / teacher in charge">
+      <select name="day" aria-label="Day">
+        <option value="">No fixed day</option><option value="0">Monday</option><option value="1">Tuesday</option><option value="2">Wednesday</option>
+        <option value="3">Thursday</option><option value="4">Friday</option><option value="5">Saturday</option>
+      </select>
+      <div class="two"><label>Start<input type="time" name="start"></label><label>End<input type="time" name="end"></label></div>
+      <input name="venue" placeholder="Venue (optional)">
+      <button>Add activity</button>
+    </form>
+    <p class="err" id="actErr"></p>
+  </section>
+  <section class="list">
+    <div class="astats" id="actStats"></div>
+    <div class="chiprow" id="actChips"></div>
+    <div id="actList"></div>
+  </section>
+</main>
+</div>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
