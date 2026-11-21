@@ -26,6 +26,3 @@ Visual Studio Code
 #Made BY:
 
 Anirudh Gupta 
-Yashi Kumari 
-Taniya Mahar 
-Semon Lamba 
